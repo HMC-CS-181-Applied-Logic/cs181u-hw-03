@@ -1,0 +1,53 @@
+MODULE p(id, turn, other)
+
+VAR
+  pc   : {n, w, c};
+  flag : boolean;
+
+ASSIGN
+  init(pc) := n;
+  init(flag) := FALSE;
+
+  next(pc) := 
+    case
+      pc = n : w;
+      pc = c : n;
+      pc = w & (turn = id | !other.flag) : c;
+      pc = w : w;
+    esac;
+
+  next(turn) :=
+    case
+      pc = n    : (id + 1) mod 2;
+      TRUE      : turn;
+    esac;
+
+  next(flag) := 
+    case
+      pc = n : TRUE;
+      pc = c : FALSE;
+      TRUE   : flag;
+    esac;
+
+FAIRNESS running
+
+MODULE main
+
+VAR 
+  turn : 0..1;
+  p0 :  process p(0, turn, p1);
+  p1 :  process p(1, turn, p0);
+
+ASSIGN
+  init(turn) := 0;
+
+
+LTLSPEC 
+  G(!(p0.pc = c & p1.pc = c))
+
+LTLSPEC 
+  G(p0.pc = w -> F(p0.pc = c)) & G(p1.pc = w -> F(p1.pc = c))
+
+LTLSPEC 
+  G(p0.pc != c & p1.pc != c -> F(p0.pc = c | p0.pc = c))
+

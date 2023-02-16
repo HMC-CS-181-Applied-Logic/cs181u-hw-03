@@ -1,0 +1,2 @@
+alias q "quit"
+alias save_ts "print_fair_transitions -f dot -o fsm.dot"

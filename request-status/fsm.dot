@@ -1,0 +1,27 @@
+strict digraph {
+1 -> 1
+1 -> 2
+3 -> 1
+3 -> 2
+2 -> 1
+2 -> 3
+2 -> 2
+2 -> 4
+4 -> 1
+4 -> 3
+4 -> 2
+4 -> 4
+{ rank = sink;
+  Legend [shape=none, margin=0, label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="2">
+     <TR>
+      <TD COLSPAN="2"><B>States Legend</B></TD>
+     </TR>
+<TR><TD><FONT COLOR="blue">1:</FONT></TD><TD><FONT COLOR="black">request = TRUE, status = busy</FONT></TD></TR>
+<TR><TD><FONT COLOR="blue">2:</FONT></TD><TD><FONT COLOR="black">request = FALSE, status = busy</FONT></TD></TR>
+<TR><TD><FONT COLOR="blue">3:</FONT></TD><TD><FONT COLOR="black">request = TRUE, status = ready</FONT></TD></TR>
+<TR><TD><FONT COLOR="blue">4:</FONT></TD><TD><FONT COLOR="black">request = FALSE, status = ready</FONT></TD></TR>
+ </TABLE> >];
+}
+
+}
